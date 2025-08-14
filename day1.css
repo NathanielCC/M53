@@ -1,0 +1,32 @@
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .tick-list {
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 400px; /* Set a max height for scrolling */
+        }
+        .tick-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        .tick-item:hover {
+            background-color: #f9f9f9;
+        }
+        .checkbox {
+            margin-right: 10px;
+            cursor: pointer;
+        }
