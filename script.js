@@ -44,7 +44,7 @@ loadingCard.style.opacity = "0";
 const cards = [introCard, destCard,loadingCard]
 
 for (let i = 0; i < 3; i++) {
-    cards[i].style.transform = "opacity 0.5s ease-in-out"
+    cards[i].style.transition = "opacity 0.5s ease-in-out"
 }
 
 function toggleFadeInOut(card1,card2) {
