@@ -74,7 +74,7 @@ returnButton.addEventListener('click', () => {
 })
 
 introCard.addEventListener('click', () => {
-    destNum = rand
+    destNum = getRandomNumber()
     destCard.innerHTML = `
         <div id="destination-header">
             <h1>You got: ${place[destNum]}</h1>
