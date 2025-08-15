@@ -26,6 +26,8 @@ const place_image = [
     "Tokyo_bg.png"
 ];
 
+let destNum = 1
+
 const introCard = document.getElementById("intro-card")
 const destCard = document.getElementById("destination-card")
 const returnButton = document.getElementById("return-button")
@@ -42,6 +44,18 @@ returnButton.addEventListener('click', () => {
 })
 
 introCard.addEventListener('click', () => {
+    destCard.innerHTML = `
+        <div id="destination-header">
+            <h1>You got: ${place[destNum]}</h1>
+            <img id="header_img" src="assets/${icons[destNum]}">
+        </div>
+        <div id = "main-pic">
+            <img id = "pic" src = "assets/${place_image[destNum]}">
+        </div>
+        <p id="description-text">
+            ${description[destNum]}
+        </p>
+    `
     introCard.style.opacity = "0"
     introCard.style.display = "none"
     destCard.style.display = "flex"

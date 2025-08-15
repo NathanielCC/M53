@@ -1,8 +1,11 @@
 /* 1. Main container styles */
+body{
+    background-color: #03b1fc;
+}
+
 #main-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     width: 100vw;
     background-color: #03b1fc;
     align-items: center;
@@ -17,16 +20,15 @@
     align-items: center;
     justify-content: center;
     width: 80vw;
-    min-height: 80vh;
+    min-height: 60vh;
     background: none;
     font-family: 'Galano Grotesque', Arial, sans-serif;
     background: #fff;
     border-radius: 16px;
-    padding:5%;
+    padding:3%;
 }
 
-/* 3. Intro card styles */
-.intro-card {
+#loading-card{
     width: 100%;
     padding: 2rem;
     border-radius: 16px;
@@ -37,8 +39,23 @@
     display:none;
 }
 
+/* 3. Intro card styles */
+#intro-card {
+    width: 100%;
+    border-radius: 16px;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+    font-family: 'Galano Grotesque', Arial, sans-serif;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    border-radius: 5px;
+}
+
 /* 4. Destination card styles */
-.destination-card {
+#destination-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,10 +63,13 @@
     width: 100%;
     font-family: 'Galano Grotesque', Arial, sans-serif;
     display: flex;
+    gap: 3;
+    height:100%;
+    display:none;
 }
 
 /* 5. Destination header styles */
-.destination-header {
+#destination-header {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,13 +77,12 @@
     gap: 1rem;
     width: 100%;
     font-family: 'Galano Grotesque', Arial, sans-serif;
-    height: 5vh; /* 5% of viewport height */
-    min-height: 60px;
-    max-height: 100px;
     overflow: hidden;
+    padding-bottom: 10px;
+    height:10%
 }
 
-.destination-header h1 {
+#destination-header h1 {
     font-size: 1.5rem;
     margin: 0;
     line-height: 1;
@@ -72,8 +91,8 @@
     align-items: center;
 }
 
-.destination-header img,
-.destination-header .header_img {
+#destination-header img,
+#destination-header .header_img {
     max-height: 90%;
     max-width: 60px;
     height: auto;
@@ -83,10 +102,41 @@
 }
 
 /* 6. Description text styles */
-.description-text {
-    text-align: left;
+#description-text {
+    text-align: center;
     width: 100%;
     font-family: 'Galano Grotesque', Arial, sans-serif;
-    margin-top: 1rem;
+    margin-top: 20px;
     font-size: 1.1rem;
+}
+
+#return-button {
+    text-align: center;
+    font-size: 16;
+    font-family: 'Galano Grotesque', Arial, sans-serif;
+    padding: 20px;
+    height:20px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1px;
+    background-color: red;
+    color: #fff;
+    margin: 20px;
+}
+
+#main-pic {
+    width: 600px;
+    height:300px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+#pic{
+    width: 100%;
+    height:100%;
+    object-fit: contain;
 }

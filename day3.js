@@ -26,6 +26,37 @@ const place_image = [
     "Tokyo_bg.png"
 ];
 
+function getRandomNumber() {
+    return Math.floor(Math.random() * 4);
+}
+
+let destNum = 1
+
+function loadingCardTransition() {
+    introCard.style.opacity = "0"
+    introCard.style.display = "none"
+    loadingCard.style.display = "flex"
+    loadingCard.style.opacity = "1"
+    let dots = ''
+    let count = 0
+    const interval = setInterval(() => {
+            if (count < 6) { // 6 dots in total for 3 seconds
+                dots += '.';
+                loadingCard.innerHTML = `<h1>Loading${dots}<h1>`
+                count++;
+            } else {
+                dots = ''
+                count = 0
+            }
+    }, 250)
+    setTimeout(() => {
+        loadingCard.style.display = "none"
+        loadingCard.style.opacity = "0"
+        destCard.style.display = "flex"
+        destCard.style.opacity = "1"
+    }, 3000);
+}
+
 const introCard = document.getElementById("intro-card")
 const destCard = document.getElementById("destination-card")
 const returnButton = document.getElementById("return-button")
@@ -42,10 +73,20 @@ returnButton.addEventListener('click', () => {
 })
 
 introCard.addEventListener('click', () => {
-    introCard.style.opacity = "0"
-    introCard.style.display = "none"
-    destCard.style.display = "flex"
-    destCard.style.opacity = "1"
+    destNum = rand
+    destCard.innerHTML = `
+        <div id="destination-header">
+            <h1>You got: ${place[destNum]}</h1>
+            <img id="header_img" src="assets/${icons[destNum]}">
+        </div>
+        <div id = "main-pic">
+            <img id = "pic" src = "assets/${place_image[destNum]}">
+        </div>
+        <p id="description-text">
+            ${description[destNum]}
+        </p>
+    `
+    loadingCardTransition()
 })
 
 
