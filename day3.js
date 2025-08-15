@@ -60,6 +60,7 @@ function loadingCardTransition() {
 const introCard = document.getElementById("intro-card")
 const destCard = document.getElementById("destination-card")
 const returnButton = document.getElementById("return-button")
+const loadingCard = document.getElementById("loading-card")
 
 introCard.style.opacity = "1";
 destCard.style.opacity = "0";

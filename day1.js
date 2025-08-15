@@ -32,7 +32,6 @@ const returnButton = document.getElementById("return-button")
 
 introCard.style.opacity = "1";
 destCard.style.opacity = "0";
-loadingCard.style.opacity = "0";
 
 returnButton.addEventListener('click', () => {
     destCard.style.opacity = "0"
