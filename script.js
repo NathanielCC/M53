@@ -36,10 +36,13 @@ const introCard = document.getElementById("intro-card")
 const destCard = document.getElementById("destination-card")
 const loadingCard = document.getElementById("loading-card")
 const returnButton = document.getElementById("return-button")
+const nextButton = document.getElementById("next-button")
 
 introCard.style.opacity = "1";
 destCard.style.opacity = "0";
 loadingCard.style.opacity = "0";
+
+let introClicked = false;
 
 const cards = [introCard, destCard,loadingCard]
 
@@ -56,8 +59,8 @@ function toggleFadeInOut(card1,card2) {
     }, 500); // Match timeout with CSS transition duration
 }
 
-function loadingCardTransition() {
-    toggleFadeInOut(introCard,loadingCard)
+function loadingCardTransition(initialCard,finalCard) {
+    toggleFadeInOut(initialCard,loadingCard)
     let dots = ''
     let count = 0
     const interval = setInterval(() => {
@@ -70,7 +73,7 @@ function loadingCardTransition() {
                 count = 0
             }
     }, 250)
-    setTimeout(() => {toggleFadeInOut(loadingCard, destCard)
+    setTimeout(() => {toggleFadeInOut(loadingCard, finalCard)
     }, 3000);
 }
 
@@ -89,7 +92,26 @@ introCard.addEventListener('click',() => {
             ${description[destNum]}
         </p>
     `
-    loadingCardTransition()
+    loadingCardTransition(introCard,destCard)
+    introClicked = true;
+    if (introClicked) {
+        nextButton.addEventListener('click',() => {
+            destNum = getRandomNumber()
+            destCard.innerHTML = `
+                <div id="destination-header">
+                    <h1>You got: ${place[destNum]}</h1>
+                    <img id="header_img" src="assets/${icons[destNum]}">
+                </div>
+                <div id = "main-pic">
+                    <img id = "pic" src = "assets/${place_image[destNum]}">
+                </div>
+                <p id="description-text">
+                    ${description[destNum]}
+                </p>
+            `
+            loadingCardTransition(destCard,destCard)
+    })
+}
 })
 
 returnButton.addEventListener('click', () => {
