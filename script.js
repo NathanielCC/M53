@@ -47,7 +47,7 @@ let introClicked = false;
 const cards = [introCard, destCard,loadingCard]
 
 for (let i = 0; i < 3; i++) {
-    cards[i].style.transform = "opacity 0.5s ease-in-out"
+    cards[i].style.transition = "opacity 0.5s ease-in-out"
 }
 
 function toggleFadeInOut(card1,card2) {
@@ -63,17 +63,20 @@ function loadingCardTransition(initialCard,finalCard) {
     toggleFadeInOut(initialCard,loadingCard)
     let dots = ''
     let count = 0
+    loadingCard.innerHTML = `<h1>Loading<h1>`;
     const interval = setInterval(() => {
-            if (count < 6) { // 6 dots in total for 3 seconds
-                dots += '.';
-                loadingCard.innerHTML = `<h1>Loading${dots}<h1>`
-                count++;
-            } else {
-                dots = ''
-                count = 0
-            }
+        loadingCard.innerHTML = `<h1>Loading${dots}<h1>`
+        if (count < 6) { // 6 dots in total for 3 seconds
+            dots += '.';
+            count++;
+        } else {
+            dots = ''
+            count = 0
+        }
     }, 250)
-    setTimeout(() => {toggleFadeInOut(loadingCard, finalCard)
+    setTimeout(() => {
+        clearInterval(interval)
+        toggleFadeInOut(loadingCard, finalCard)
     }, 3000);
 }
 

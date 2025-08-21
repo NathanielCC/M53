@@ -31,29 +31,32 @@ function getRandomNumber() {
 }
 
 let destNum = 1
+let introClicked = false
 
-function loadingCardTransition() {
-    introCard.style.opacity = "0"
-    introCard.style.display = "none"
+function loadingCardTransition(initialCard,finalCard) {
+    initialCard.style.opacity = "0"
+    initialCard.style.display = "none"
     loadingCard.style.display = "flex"
     loadingCard.style.opacity = "1"
     let dots = ''
     let count = 0
+    loadingCard.innerHTML = `<h1>Loading<h1>`;
     const interval = setInterval(() => {
-            if (count < 6) { // 6 dots in total for 3 seconds
-                dots += '.';
-                loadingCard.innerHTML = `<h1>Loading${dots}<h1>`
-                count++;
-            } else {
-                dots = ''
-                count = 0
-            }
+        loadingCard.innerHTML = `<h1>Loading${dots}<h1>`
+        if (count < 6) { // 6 dots in total for 3 seconds
+            dots += '.';
+            count++;
+        } else {
+            dots = ''
+            count = 0
+        }
     }, 250)
     setTimeout(() => {
+        clearInterval(interval)
         loadingCard.style.display = "none"
         loadingCard.style.opacity = "0"
-        destCard.style.display = "flex"
-        destCard.style.opacity = "1"
+        finalCard.style.display = "flex"
+        finalCard.style.opacity = "1"
     }, 3000);
 }
 
@@ -61,6 +64,7 @@ const introCard = document.getElementById("intro-card")
 const destCard = document.getElementById("destination-card")
 const returnButton = document.getElementById("return-button")
 const loadingCard = document.getElementById("loading-card")
+const nextButton = document.getElementById("next-button")
 
 introCard.style.opacity = "1";
 destCard.style.opacity = "0";
@@ -73,8 +77,9 @@ returnButton.addEventListener('click', () => {
     introCard.style.opacity = "1"
 })
 
-introCard.addEventListener('click', () => {
+introCard.addEventListener('click',() => {
     destNum = getRandomNumber()
+    // Added Day 3
     destCard.innerHTML = `
         <div id="destination-header">
             <h1>You got: ${place[destNum]}</h1>
@@ -87,7 +92,27 @@ introCard.addEventListener('click', () => {
             ${description[destNum]}
         </p>
     `
-    loadingCardTransition()
+    loadingCardTransition(introCard,destCard)
+    introClicked = true;
+    if (introClicked) {
+        nextButton.addEventListener('click',() => {
+            destNum = getRandomNumber()
+            destCard.innerHTML = `
+                <div id="destination-header">
+                    <h1>You got: ${place[destNum]}</h1>
+                    <img id="header_img" src="assets/${icons[destNum]}">
+                </div>
+                <div id = "main-pic">
+                    <img id = "pic" src = "assets/${place_image[destNum]}">
+                </div>
+                <p id="description-text">
+                    ${description[destNum]}
+                </p>
+            `
+            loadingCardTransition(destCard,destCard)
+    })
+}
 })
+
 
 
