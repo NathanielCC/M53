@@ -33,7 +33,22 @@ function loadingCardTransition(initialCard, finalCard) {
   clickNextEvent(canClickNext);
   canClickReturn = false;
   clickReturnEvent(canClickReturn);
+  let dots = "";
+  let count = 0;
+  loadingCard.innerHTML = `<h1>Loading<h1>`;
+  const interval = setInterval(() => {
+    loadingCard.innerHTML = `<h1>Loading${dots}<h1>`;
+    if (count < 6) {
+      // 6 dots in total for 3 seconds
+      dots += ".";
+      count++;
+    } else {
+      dots = "";
+      count = 0;
+    }
+  }, 250);
   setTimeout(() => {
+    clearInterval(interval);
     destCard.innerHTML = `
         <div id="destination-header">
             <h1>You got: ${place[destNum]}</h1>
@@ -45,11 +60,12 @@ function loadingCardTransition(initialCard, finalCard) {
         <p id="description-text">
             ${description[destNum]}
         </p>
-    `;
+        `;
     loadingCard.style.display = "none";
     loadingCard.style.opacity = "0";
     finalCard.style.display = "flex";
     finalCard.style.opacity = "1";
+
     canClickNext = true;
     clickNextEvent(canClickNext);
     canClickReturn = true;
@@ -66,29 +82,6 @@ const nextButton = document.getElementById("next-button");
 introCard.style.opacity = "1";
 destCard.style.opacity = "0";
 loadingCard.style.opacity = "0";
-
-returnButton.addEventListener("click", () => {
-  destCard.style.opacity = "0";
-  destCard.style.display = "none";
-  introCard.style.display = "flex";
-  introCard.style.opacity = "1";
-  canClickNext = false;
-  clickNextEvent(canClickNext);
-});
-
-function clickNextEvent(canClick) {
-  if (canClick) {
-    nextButton.addEventListener("click", () => {
-      destNum = getRandomNumber();
-      canClickNext = true;
-      clickNextEvent(canClickNext);
-      loadingCardTransition(destCard, destCard);
-    });
-  } else {
-    nextButton.addEventListener("click", () => {});
-  }
-}
-
 function clickReturnEvent(canClick) {
   if (canClick) {
     returnButton.addEventListener("click", () => {
@@ -101,6 +94,17 @@ function clickReturnEvent(canClick) {
     });
   } else {
     returnButton.addEventListener("click", () => {});
+  }
+}
+
+function clickNextEvent(canClick) {
+  if (canClick) {
+    nextButton.addEventListener("click", () => {
+      destNum = getRandomNumber();
+      loadingCardTransition(destCard, destCard);
+    });
+  } else {
+    nextButton.addEventListener("click", () => {});
   }
 }
 
